@@ -1,0 +1,51 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Editar Movimentação</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo Movimentação</mat-label>
+            <mat-select [(ngModel)]="movimentacao.tipo_movimentacao" name="tipo_movimentacao" formControlName="tipo_movimentacao" [errorStateMatcher]="matcher">
+                <mat-option value="Embarque">Embarque</mat-option>
+                <mat-option value="Descarga">Descarga</mat-option>
+                <mat-option value="Gate In">Gate In</mat-option>
+                <mat-option value="Gate out">Gate out</mat-option>
+                <mat-option value="Posicionamento">Posicionamento</mat-option>
+                <mat-option value="Pilha">Pilha</mat-option>
+                <mat-option value="Pesagem">Pesagem</mat-option>
+                <mat-option value="Scanner">Scanner</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.tipo_movimentacao.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date" [(ngModel)]="movimentacao.inicio" name="inicio" formControlName="inicio" [errorStateMatcher]="matcher">
+                <input matEndDate placeholder="End date" [(ngModel)]="movimentacao.fim" name="fim" formControlName="fim" [errorStateMatcher]="matcher">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+            <mat-error *ngIf="f.inicio.errors?.required">Campo Obrigatório!</mat-error>
+            <mat-error *ngIf="f.fim.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Container</mat-label>
+            <mat-select [(ngModel)]="movimentacao.container_id" name="container_id" formControlName="container_id" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let ctn of containers" [value]="ctn.id">{{ctn.numero}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.container_id.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button routerLink="/movimentacoes" color="accent">Cancela</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Salvar</button>
+
+    </form>
+
+</mat-card>

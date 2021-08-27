@@ -1,0 +1,53 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Editar Container</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="form" (ngSubmit)="save()">
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Cliente" [(ngModel)]="container.cliente" name="cliente" formControlName="cliente" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="f.cliente.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Nº Container" [(ngModel)]="container.numero" name="numero" formControlName="numero" formControlName="numero" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="f.numero.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo</mat-label>
+            <mat-select [(ngModel)]="container.tipo" name="tipo" formControlName="tipo" [errorStateMatcher]="matcher">
+                <mat-option [value]="20">20</mat-option>
+                <mat-option [value]="40">40</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.tipo.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="container.status" name="status" formControlName="status" [errorStateMatcher]="matcher">
+                <mat-option value="Cheio">Cheio</mat-option>
+                <mat-option value="Vazio">Vazio</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.status.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select [(ngModel)]="container.categoria" name="categoria" formControlName="categoria" [errorStateMatcher]="matcher">
+                <mat-option value="Importação">Importação</mat-option>
+                <mat-option value="Exportação ">Exportação</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.categoria.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button routerLink="/containers" color="accent">Cancela</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Salvar</button>
+
+    </form>
+
+</mat-card>

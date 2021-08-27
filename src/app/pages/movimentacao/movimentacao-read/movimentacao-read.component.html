@@ -1,0 +1,47 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Movimentações</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+        <a mat-raised-button routerLink="/movimentacoes/novo" color="primary" class="mb-2">Nova Movimentação</a>
+
+        <table mat-table [dataSource]="movimentacoes" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="tipo_movimentacao">
+                <th mat-header-cell *matHeaderCellDef> Tipo Movimentação </th>
+                <td mat-cell *matCellDef="let element"> {{element.tipo_movimentacao}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="inicio">
+                <th mat-header-cell *matHeaderCellDef> Início </th>
+                <td mat-cell *matCellDef="let element"> {{element.inicio | date: 'dd/MM/yyyy HH:mm'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fim">
+                <th mat-header-cell *matHeaderCellDef> Fim </th>
+                <td mat-cell *matCellDef="let element"> {{element.fim | date: 'dd/MM/yyyy HH:mm'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="container">
+                <th mat-header-cell *matHeaderCellDef> Nº Container </th>
+                <td mat-cell *matCellDef="let element"> {{element.container_id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acoes">
+                <th mat-header-cell *matHeaderCellDef> Ações </th>
+                <td mat-cell *matCellDef="let element">
+                    <a routerLink="/movimentacoes/update/{{element.id}}" class="edit">
+                        <mat-icon color="primary">edit</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </mat-card-content>
+
+</mat-card>

@@ -1,0 +1,24 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Deletar Container</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="form" (ngSubmit)="save">
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Cliente" [(ngModel)]="container.cliente" name="cliente" formControlName="cliente" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="f.cliente.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <input matInput placeholder="Nº Container" [(ngModel)]="container.numero" name="numero" formControlName="numero" formControlName="numero" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="f.numero.errors?.required">Campo Obrigatório!</mat-error>
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button routerLink="/containers" color="accent">Cancela</button>
+        <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Confirmar</button>
+
+    </form>
+
+</mat-card>
